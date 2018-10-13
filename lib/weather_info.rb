@@ -15,3 +15,12 @@ def call_yahoo_url(config, url)
         'Authorization' => 
     )
 end
+
+yahoo_response = {}
+yahoo_results = {}
+
+## HAPPY requests
+
+
+
+## SAD requests
