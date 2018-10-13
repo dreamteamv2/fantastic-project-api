@@ -1,26 +1,35 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'minitest/rg'
 require 'yaml'
-require_relative 'lib/weather/yahoo-api'
+require_relative '../lib/weather/yahoo_api'
 
-describe 'Test fantastic library'
-    CITY = 'Taipei'.freeze
-    forecast_temp = '39'.freeze
+describe 'Test fantastic library' do
+  CITY = 'Taipei City'
+  CORRECT = YAML.safe_load(File.read('spec/fixtures/yahoo_results.yml'))
 
-    CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-    YH_TOKEN = CONFIG['YH_TOKEN']
+  describe 'Weather information' do
+    it 'HAPPY: should provide correct weather data' do
+      weather_data = FantasticProject::YahooAPI.new
+                                               .weather(CITY)
+      _(weather_data.name).must_equal CORRECT['query']['results']['channel']['location']['city']
+      _(weather_data.link).must_equal CORRECT['query']['results']['channel']['link']
+    end
+  end
 
-    CORRECT = YAML.safe_load(File.read('spec/fixtures/yahoo_response.yml'))
-    RESPONSE = YAML.load(File.read('spec/fixtures/yahoo_response'))
+  describe 'City information' do
+    before do
+      @city = FantasticProject::YahooAPI.new
+                                        .weather(CITY)
+    end
 
-    describe 'Weather information' do
-        it 'HAPPY: should provide correct weather data' do
-            weather_data = FantasticProject::yahoo-api.new(YH_TOKEN)
-                                               .weather_data(CITY, forecast_temp)
-            _(weather_data.CITY).must_equal CORRECT['CITY']
-            _(weather_data.0:forecast:temp).must_equal CORRECT['0:forecast:temp']   
-        end
+    it 'HAPPY: should be the same city' do
+      _(@city.name).must_equal CITY
+    end
 
-        it 'SAD: should raise exception on incorrect project' do 
-            weather do 
-                FantasticProject::yahoo-api.new(YH_TOKEN).weather_data('')
+    it 'HAPPY: should has forecast' do
+      _(@city.forecast).wont_be_nil
+    end
+  end
+end

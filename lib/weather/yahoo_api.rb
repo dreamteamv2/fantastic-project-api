@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'http'
-require_relative 'city.rb'
+require 'cgi'
+require_relative 'city'
 
 module FantasticProject
   # Library Yahoo
@@ -14,14 +17,14 @@ module FantasticProject
       404 => Errors::NotFound
     }.freeze
 
-    def initialize(token, cache: {})
-      @yahoo_token = token
+    def initialize(cache: {})
       @cache = cache
     end
 
     def weather(city)
       weather_url = yh_api_path(city)
-      call_yh_url(weather_url).parse
+      weather_data = call_yh_url(weather_url).parse
+      City.new(weather_data)
     end
 
     private
@@ -29,12 +32,12 @@ module FantasticProject
     def yh_api_path(path)
       yh_url = 'https://query.yahooapis.com/v1/public/yql?q='
       query = 'select * from weather.forecast where woeid'\
-              " in (select woeid from geo.places(1) where text=#{path})"\
-              '&format=json'
-      CGI.escape(yh_url + query)
+              " in (select woeid from geo.places(1) where text=\"#{path}\")"
+      format_request = '&format=json'
+      yh_url + CGI.escape(query) + format_request
     end
 
-    def call_yh_ulr(url)
+    def call_yh_url(url)
       result = @cache.fetch(url) do
         HTTP.get(url)
       end
@@ -42,7 +45,7 @@ module FantasticProject
     end
 
     def successful?(result)
-      HTTP_ERROR.keys?(result.code) ? false : true
+      HTTP_ERROR.key?(result.code) ? false : true
     end
 
     def raise_error(result)

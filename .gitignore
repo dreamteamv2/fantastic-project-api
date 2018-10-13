@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 
 config/secrets.yml
 spec/fixtures/
+.DS_Store
