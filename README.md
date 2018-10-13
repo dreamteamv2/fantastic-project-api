@@ -11,5 +11,6 @@ Websites we think will be of help:
 | Skyscanner                              | https://www.skyscanner.net                              | Flights from-to, price   |
 | Wikipedia                               | https://www.wikipedia.com                               | Short intro. to the city |
 
-
-| Weather | Events | Flights | Short description of the city | 
+| Yahoo   | picativ| Skyscanner| Wikipedia                     |
+| :-------|:------:| :--------:| :----------------------------:|
+| Weather | Events | Flights   | Short description of the city | 
