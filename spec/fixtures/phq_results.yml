@@ -1,0 +1,395 @@
+---
+events:
+  count: 20
+  overflow: true
+  next: https://api.predicthq.com/v1/events/?country=TW&offset=10
+  previous: 
+  results:
+  - relevance: 1.0
+    id: YdM5oNVT5SSbWxy2oX
+    title: Taiwan Russia Tourism Exchange
+    description: |-
+      Taiwan Russia Tourism Exchange is the platform for the Taiwan and Russian tour operators to connect, collaborate on innovative and creative tourism ideas for 2019.
+      Speakers:
+      Margarita Yakovleva, General Manager, Metropol
+      Taiwan Tourism Board TBC
+      Taiwan Toursim Blogger TBC
+      Program:
+      Speakers presentations
+      Panel discussion
+      Networking drinks from 7 pm at the Grand Hotel
+    category: conferences
+    labels:
+    - conference
+    - outdoor
+    rank: 0
+    local_rank: 0
+    duration: 10800
+    start: '2018-11-19T01:30:00Z'
+    end: '2018-11-19T04:30:00Z'
+    updated: '2018-10-15T01:32:07Z'
+    first_seen: '2018-10-15T01:30:12Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.526137
+    - 25.078304
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1665420'
+    state: active
+  - relevance: 1.0
+    id: 7yz5FQ7AQPwNFVMPNT
+    title: International Conference on Sensors, Materials and Manufacturing
+    description: ''
+    category: conferences
+    labels:
+    - conference
+    rank: 30
+    local_rank: 36
+    duration: 205200
+    start: '2018-11-19T01:00:00Z'
+    end: '2018-11-21T10:00:00Z'
+    updated: '2018-09-17T01:19:05Z'
+    first_seen: '2018-09-14T12:02:52Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.535497
+    - 25.042233
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280290'
+      - '1668341'
+    state: active
+  - relevance: 1.0
+    id: kPiN2oDMsHv4tobyRV
+    title: 2018 2nd International Conference on Sensors, Materials and Manufacturing
+      (ICSMM 2018)
+    description: |-
+      Publication:Accepted papers will be published in: Materials Science Forum, which will be indexed by SCOPUS, EI Compendex, Inspec etc or published in International Journal of Materials, Mechanics and Manufacturing(IJMMM).
+      Keynote Speakers:Prof. Shen-Ming Chen, National Taipei University of Technology, Taiwan;Prof. Edward Yi Chang, National Chiao Tung University, Taiwan;Prof. Norbert Schwesinger, Technical University of Munich, Germany;Prof. Sergei Alexandrov, Beihang University, China;
+      Conference Co-Chairs:Prof. Shen-Ming Chen, National Taipei University of Technology, Taiwan;Prof. Edward Yi Chang, National Chiao Tung University, Taiwan;Prof. Norbert Schwesinger, Technical University of Munich, Germany;Prof. Sergei Alexandrov, Beihang University, China;
+      VENUE:National Taipei University of Technology
+      Contact us:Ms. Tammy LuoE-mail: icsmm@cbees.netTell: +852-3500-0137 (Hong Kong)+1-206-456-6022 (USA)+86-28-86528465 (China)
+      For more detailed information, please visit our website http://www.icsmm.org/.We are looking forward to your joining in us!
+    category: conferences
+    labels:
+    - conference
+    - science
+    - technology
+    rank: 0
+    local_rank: 0
+    duration: 208800
+    start: '2018-11-19T00:00:00Z'
+    end: '2018-11-21T10:00:00Z'
+    updated: '2018-07-15T21:45:38Z'
+    first_seen: '2018-07-15T21:45:12Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.5654
+    - 25.033
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1677792'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    state: active
+  - relevance: 1.0
+    id: 4L9q8QqX5YXD
+    title: International Conference on Chemical Science and Engineering
+    description: ''
+    category: conferences
+    labels:
+    - conference
+    rank: 30
+    local_rank: 36
+    duration: 208800
+    start: '2018-11-19T00:00:00Z'
+    end: '2018-11-21T10:00:00Z'
+    updated: '2018-10-10T01:01:50Z'
+    first_seen: '2017-07-31T02:22:23Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.535497
+    - 25.042233
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280290'
+      - '1668341'
+    state: active
+  - relevance: 1.0
+    id: JjyVkqwhAfavzg7WEN
+    title: 2018 Yong JunHyung &Yang; Yoseop Mini Concert in Taipei
+    description: |-
+      Name：2018 Yong JunHyung &Yang; Yoseop Mini Concert in Taipei
+      Date：2018/11/17（六）14:00
+      Location：TICC 台北國際會議中心
+      Price：NT$ 4,800/NT$ 3,800/NT$ 2,800/身障席NT$ 2,400
+      Organizer：中華文創娛樂 Chung-Hua Creative & Culture Entertainment
+      Co-organizer：TAJOY
+      Management Company：Around Us
+      Sponsor：遠傳電信
+      Ticket sales：KKTIX
+      October 7th 2018（Sun.）11:00 a.m. the ticket will sell on KKTIX Web Site andFami Port！
+
+      https://cce.kktix.cc/events/yjyy-efl132
+    category: concerts
+    labels:
+    - concert
+    - music
+    rank: 11
+    local_rank: 10
+    duration: 0
+    start: '2018-11-18T06:00:00Z'
+    end: '2018-11-18T06:00:00Z'
+    updated: '2018-10-18T07:56:15Z'
+    first_seen: '2018-10-18T07:46:00Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.560492
+    - 25.033263
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1677792'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    state: active
+  - relevance: 1.0
+    id: vRJCAzAtmLiXTi4DMs
+    title: Hung Jung Kaohsiung
+    description: Are you ready to welcome the best artist in the world to your city?
+      If so, the time has come to purchase your Hung Jung Kaohsiung tickets, since
+      Hung Jung has just added a new date to the tour. The best news is that it happens
+      to be very close to your home! What is taking you so long? Hurry up and get
+      your Hung Jung Kaohsiung tickets here and now! You're only three clicks away
+      and tickets are selling like crazy. There's nothing to think about, si just
+      get hold of your Hung Jung Kaohsiung tickets before they all buy out and enjoy
+      one of the best concerts of the year! This show is expected to be a great success
+      and will certainly make history. Are you willing to miss the boat and miss out
+      on this incredible opportunity? No way! Get your Hung Jung Kaohsiung tickets
+      and join the crowd at Huashe Hotel Kaohsiung Branch!
+    category: concerts
+    labels:
+    - concert
+    - music
+    rank: 16
+    local_rank: 26
+    duration: 0
+    start: '2018-11-17T11:30:00Z'
+    end: '2018-11-17T11:30:00Z'
+    updated: '2018-08-29T05:13:20Z'
+    first_seen: '2018-08-25T07:00:33Z'
+    timezone: Asia/Taipei
+    location:
+    - 120.358621
+    - 22.652988
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280289'
+      - '1673820'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280289'
+      - '9613373'
+      - '1669984'
+    state: active
+  - relevance: 1.0
+    id: UTEW88ppNM4pdzbJJZ
+    title: Guns N' Roses Taoyuan
+    description: Guns N' Roses is coming to a town near you!! Don't miss out on this
+      fantastic opportunity to see Guns N' Roses live. Guns N' Roses will be performing
+      the latest tracks in the charts. Buy your tickets to see Guns N' Roses at StubHub.
+      Here we have all your favourite artists, so you don't have to miss out!
+    category: concerts
+    labels:
+    - concert
+    - music
+    rank: 16
+    local_rank: 35
+    duration: 0
+    start: '2018-11-17T11:00:00Z'
+    end: '2018-11-17T11:00:00Z'
+    updated: '2018-08-28T06:22:39Z'
+    first_seen: '2018-06-09T05:15:38Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.201525
+    - 25.000303
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1667900'
+      - '1667905'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1667246'
+    state: active
+  - relevance: 1.0
+    id: TrHGMGiPKiLAoMM4At
+    title: 2018 Yong JunHyung &Yang; Yoseop Mini Concert in Taipei
+    description: |-
+      Name：2018 Yong JunHyung &Yang; Yoseop Mini Concert in Taipei
+      Date：2018/11/17（六）14:00
+      Location：TICC 台北國際會議中心
+      Price：NT$ 4,800/NT$ 3,800/NT$ 2,800/身障席NT$ 2,400
+      Organizer：中華文創娛樂 Chung-Hua Creative & Culture Entertainment
+      Co-organizer：TAJOY
+      Management Company：Around Us
+      Sponsor：遠傳電信
+      Ticket sales：KKTIX
+      October 7th 2018（Sun.）11:00 a.m. the ticket will sell on KKTIX Web Site andFami Port！
+
+      https://cce.kktix.cc/events/yjyy-efl132
+    category: concerts
+    labels:
+    - concert
+    - music
+    rank: 11
+    local_rank: 10
+    duration: 0
+    start: '2018-11-17T06:00:00Z'
+    end: '2018-11-17T06:00:00Z'
+    updated: '2018-10-18T06:31:52Z'
+    first_seen: '2018-10-18T06:31:23Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.560492
+    - 25.033263
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1677792'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    state: active
+  - relevance: 1.0
+    id: 6555WsgiVCBCoQ5kmV
+    title: EAFF E-1 Football Championship - 2nd Preliminary Round - Chinese Taipei
+      vs Korea DPR
+    description: ''
+    category: sports
+    labels:
+    - soccer
+    - sport
+    rank: 76
+    local_rank: 81
+    duration: 0
+    start: '2018-11-16T11:10:00Z'
+    end: '2018-11-16T11:10:00Z'
+    updated: '2018-10-17T15:17:38Z'
+    first_seen: '2018-10-17T15:17:23Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.551415
+    - 25.049583
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1665560'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    state: active
+  - relevance: 1.0
+    id: kJuMZGuvygW37CXZUW
+    title: EAFF E-1 Football Championship - 2nd Preliminary Round - Mongolia vs Hong
+      Kong
+    description: ''
+    category: sports
+    labels:
+    - soccer
+    - sport
+    rank: 76
+    local_rank: 81
+    duration: 0
+    start: '2018-11-16T07:10:00Z'
+    end: '2018-11-16T07:10:00Z'
+    updated: '2018-10-17T15:17:34Z'
+    first_seen: '2018-10-17T15:17:22Z'
+    timezone: Asia/Taipei
+    location:
+    - 121.551415
+    - 25.049583
+    scope: locality
+    country: TW
+    place_hierarchies:
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '1668338'
+      - '1665560'
+    - - '6295630'
+      - '6255147'
+      - '1668284'
+      - '7280291'
+      - '6724654'
+      - '1678228'
+    state: active

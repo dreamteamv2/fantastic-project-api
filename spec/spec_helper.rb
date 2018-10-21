@@ -10,13 +10,13 @@ require 'minitest/rg'
 require 'vcr'
 require 'webmock'
 
-require_relative '../lib/phq_api.rb'
+require_relative '../lib/events/phq_api.rb'
 
 CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-PHQ_TOKEN = CONFIG[PHQ_TOKEN]
-PHQ_CLIENT_ID = CONFIG[PHQ_CLIENT_ID]
-PHQ_SECRET_KEY = CONFIG[PHQ_SECRET_KEY]
-CORRECT = YAML.safe_load(FIle.read('spec/fixtures/phq_results.yml'))
+PHQ_TOKEN = CONFIG['PHQ_TOKEN']
+PHQ_CLIENT_ID = CONFIG['PHQ_CLIENT_ID']
+PHQ_SECRET_KEY = CONFIG['PHQ_SECRET_KEY']
+CORRECT = YAML.safe_load(File.read('spec/fixtures/phq_results.yml'))
 
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 CASSETTE_FILE = 'phq_api'.freeze

@@ -7,7 +7,7 @@ describe 'Test PHQ API library' do
     c.cassette_library_dir = CASSETTES_FOLDER
     c.hook_into :webmock
 
-    c.filter_senstive_data('<PHQ_TOKEN>') { PHQ_TOKEN }
+    c.filter_sensitive_data('<PHQ_TOKEN>') { PHQ_TOKEN }
     c.filter_sensitive_data('<PHQ_TOKEN_ESC>') { CGI.escape(PHQ_TOKEN) }
   end
 
@@ -24,25 +24,27 @@ describe 'Test PHQ API library' do
   describe 'Events information' do
     before do
       @events = FantasticProject::PredictHQAPI.new(PHQ_TOKEN)
-                                              .search_events(county: 'TW')
+                                              .search_events(country: 'TW')
     end
 
-    it 'HAPPY: should recognize owner' do
-      _(@project.owner).must_be_kind_of CodePraise::Contributor
+    it 'HAPPY: should has the same values' do
+      first_event = @events.first
+      _(first_event.title).wont_be_nil
+      _(first_event.description).wont_be_nil
+      _(first_event.title).must_equal CORRECT['events']['results'][0]['title']
+      _(first_event.description).must_equal CORRECT['events']['results'][0]['description']
     end
 
-    it 'HAPPY: should identify owner' do
-      _(@project.owner.username).wont_be_nil
-      _(@project.owner.username).must_equal CORRECT['owner']['login']
+    it 'HAPPY: should identify events' do
+      events = @events
+      _(events.count).must_equal CORRECT['events']['results'].count
     end
 
-    it 'HAPPY: should identify contributors' do
-      contributors = @project.contributors
-      _(contributors.count).must_equal CORRECT['contributors'].count
-
-      usernames = contributors.map(&:username)
-      correct_usernames = CORRECT['contributors'].map { |c| c['login'] }
-      _(usernames).must_equal correct_usernames
+    it 'BAD: should raise exception when unauthorized' do
+      proc do
+        FantasticProject::PredictHQAPI.new('BAD_TOKEN')
+                                      .search_events(county: 'TW')
+      end.must_raise FantasticProject::PredictHQAPI::Response::Unauthorized
     end
   end
 end
