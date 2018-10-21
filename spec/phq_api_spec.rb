@@ -21,7 +21,28 @@ describe 'Test PHQ API library' do
     VCR.eject_cassette
   end
 
-  describe 'Event information' do
-    it 'HAPPY: should provide correct event attributes' do
-      event = FantasticProject::phq_api.new(PHQ_TOKEN)
-                                       .event()
+  describe 'Events information' do
+    before do
+      @events = FantasticProject::PredictHQAPI.new(PHQ_TOKEN)
+                                              .search_events(county: 'TW')
+    end
+
+    it 'HAPPY: should recognize owner' do
+      _(@project.owner).must_be_kind_of CodePraise::Contributor
+    end
+
+    it 'HAPPY: should identify owner' do
+      _(@project.owner.username).wont_be_nil
+      _(@project.owner.username).must_equal CORRECT['owner']['login']
+    end
+
+    it 'HAPPY: should identify contributors' do
+      contributors = @project.contributors
+      _(contributors.count).must_equal CORRECT['contributors'].count
+
+      usernames = contributors.map(&:username)
+      correct_usernames = CORRECT['contributors'].map { |c| c['login'] }
+      _(usernames).must_equal correct_usernames
+    end
+  end
+end

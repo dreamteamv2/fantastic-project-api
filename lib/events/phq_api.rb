@@ -45,7 +45,10 @@ module FantasticProject
 
     # Decorates HTTP responses from Github with success/error
     class Response < SimpleDelegator
+      # 401 Error
       Unauthorized = Class.new(StandardError)
+
+      # 404 Error
       NotFound = Class.new(StandardError)
 
       HTTP_ERROR = {
