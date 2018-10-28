@@ -20,6 +20,11 @@ task :rerack do
   sh "rerun -c rackup --ignore 'coverage/*'"
 end
 
+desc 'Run application in development mode and port'
+task :run_dev do
+  sh 'rerun -c "rackup -p 9292"'
+end
+
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do
