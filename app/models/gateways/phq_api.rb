@@ -5,7 +5,7 @@ require 'cgi'
 require_relative 'event.rb'
 
 module FantasticProject
-  # Library for Github Web API
+  # Library for PredictHQ Web API
   class PredictHQAPI
     def initialize(token)
       @phq_token = token
@@ -17,7 +17,7 @@ module FantasticProject
       events_response['results'].map { |event_data| Event.new(event_data) }
     end
 
-    # Sends out HTTP requests to Github
+    # Sends out HTTP requests to PredictHQ
     class Request
       API_PATH = 'https://api.predicthq.com/v1/'.freeze
       EVENT_ENDPOINT = 'events/?'.freeze
