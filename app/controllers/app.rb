@@ -22,7 +22,7 @@ module FantasticProject
         routing.is do
           # GET /event/
           routing.post do
-            city = routing.params['city'].downcase
+            city = routing.params['city']
             routing.redirect "events/#{city}"
           end
         end
@@ -31,7 +31,7 @@ module FantasticProject
           # GET /event/city
           routing.get do
             events = PredictHQ::EventMapper
-              .new(TOKEN)
+              .new(PHQ_TOKEN)
               .find(country: city)
 
             view 'events', locals: { city: city, events: events }
