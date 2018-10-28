@@ -1,4 +1,4 @@
 ---
   # Directories and files below will not be scanned at all
 exclude_paths:
-  - lib/_snippets
+  - spec/fixtures/phq_api_script.rb

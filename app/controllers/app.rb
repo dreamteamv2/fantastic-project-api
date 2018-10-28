@@ -3,7 +3,7 @@
 require 'roda'
 require 'slim'
 
-module CodePraise
+module FantasticProject
   # Web App
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
@@ -18,27 +18,23 @@ module CodePraise
         view 'home'
       end
 
-      routing.on 'project' do
+      routing.on 'events' do
         routing.is do
-          # GET /project/
+          # GET /event/
           routing.post do
-            gh_url = routing.params['github_url'].downcase
-            routing.halt 400 unless (gh_url.include? 'github.com') &&
-                                    (gh_url.split('/').count >= 3)
-            owner, project = gh_url.split('/')[-2..-1]
-
-            routing.redirect "project/#{owner}/#{project}"
+            city = routing.params['city'].downcase
+            routing.redirect "events/#{city}"
           end
         end
 
-        routing.on String, String do |owner, project|
-          # GET /project/owner/project
+        routing.on String do |city|
+          # GET /event/city
           routing.get do
-            github_project = Github::ProjectMapper
-              .new(GH_TOKEN)
-              .find(owner, project)
+            events = PredictHQ::EventMapper
+              .new(TOKEN)
+              .find(country: city)
 
-            view 'project', locals: { project: github_project }
+            view 'events', locals: { city: city, events: events }
           end
         end
       end

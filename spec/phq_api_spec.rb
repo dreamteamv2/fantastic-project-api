@@ -23,7 +23,7 @@ describe 'Test PHQ API library' do
 
   describe 'Events information' do
     before do
-      @events = FantasticProject::PredictHQAPI.EventMapper
+      @events = FantasticProject::PredictHQ::EventMapper
         .new(PHQ_TOKEN)
         .find(country: 'TW')
     end
@@ -43,10 +43,10 @@ describe 'Test PHQ API library' do
 
     it 'BAD: should raise exception when unauthorized' do
       proc do
-        FantasticProject::PredictHQAPI.EventMapper
+        FantasticProject::PredictHQ::EventMapper
           .new('Bad-Token')
           .find(country: 'TW')
-      end.must_raise FantasticProject::PredictHQAPI::Response::Unauthorized
+      end.must_raise FantasticProject::PredictHQ::Api::Response::Unauthorized
     end
   end
 end

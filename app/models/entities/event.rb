@@ -1,21 +1,15 @@
 # frozen_string_literal: false
 
 module FantasticProject
-  # Provides access to forecast data
+  # Events class
   module Entity
-    # Event Class
+    # Domain entity for any event
     class Event < Dry::Struct
-      def initialize(event_data)
-        @event_data = event_data
-      end
+      include Dry::Types.module
 
-      def title
-        @event_data['title']
-      end
-
-      def description
-        @event_data['description']
-      end
+      attribute :id,          Integer.optional
+      attribute :title,       Strict::String
+      attribute :description, Strict::String
     end
   end
 end
