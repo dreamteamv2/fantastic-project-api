@@ -23,8 +23,9 @@ describe 'Test PHQ API library' do
 
   describe 'Events information' do
     before do
-      @events = FantasticProject::PredictHQAPI.new(PHQ_TOKEN)
-                                              .search_events(country: 'TW')
+      @events = FantasticProject::PredictHQAPI.EventMapper
+        .new(PHQ_TOKEN)
+        .find(country: 'TW')
     end
 
     it 'HAPPY: should has the same values' do
@@ -42,8 +43,9 @@ describe 'Test PHQ API library' do
 
     it 'BAD: should raise exception when unauthorized' do
       proc do
-        FantasticProject::PredictHQAPI.new('BAD_TOKEN')
-                                      .search_events(county: 'TW')
+        FantasticProject::PredictHQAPI.EventMapper
+          .new('Bad-Token')
+          .find(country: 'TW')
       end.must_raise FantasticProject::PredictHQAPI::Response::Unauthorized
     end
   end

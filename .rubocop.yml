@@ -32,3 +32,8 @@ Style/SymbolArray:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
+
+Metrics/LineLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
