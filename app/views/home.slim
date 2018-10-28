@@ -1,0 +1,18 @@
+.container
+  form role="form" action="/event" method='POST' id='show-event-form'
+    .row.vertical-align.query-bar
+      .col-md-2.col-sm-3
+        .text-right City:
+      .col-md-8.col-sm-6
+        input { 
+          type='text' name='city'
+          id='city_input' class="form-control"
+          placeholder="e.g. Kosovo"
+        }
+      .col-md-2.col-sm-3
+        button { 
+          type='submit' id='repo-form-submit' class='submit' 
+          value='submit' class="btn btn-success" 
+        } Show Events
+    .row
+      .col-md-12.blank-row

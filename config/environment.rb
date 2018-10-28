@@ -1,10 +1,12 @@
-require'roda'
-require'yaml'
+# frozen_string_literal: true
 
-module CodePraise
-    # Configuration  for  the  App
-    classApp  <  Roda
-      CONFIG  =  YAML.safe_load(File.read('config/secrets.yml'))
-      GH_TOKEN  =  CONFIG['GH_TOKEN']
-    end
+require 'roda'
+require 'yaml'
+
+module FantasticProject
+  # Configuration for the App
+  class App < Roda
+    CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
+    PHQ_TOKEN = CONFIG['PHQ_TOKEN']
+  end
 end

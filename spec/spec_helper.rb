@@ -10,7 +10,7 @@ require 'minitest/rg'
 require 'vcr'
 require 'webmock'
 
-require_relative '../lib/events/phq_api.rb'
+require_relative '../init.rb'
 
 CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
 PHQ_TOKEN = CONFIG['PHQ_TOKEN']

@@ -3,7 +3,8 @@
 module FantasticProject
   # Provides access to forecast data
   module Entity
-    class Event
+    # Event Class
+    class Event < Dry::Struct
       def initialize(event_data)
         @event_data = event_data
       end

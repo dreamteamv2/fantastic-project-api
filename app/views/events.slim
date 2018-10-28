@@ -1,0 +1,24 @@
+.container
+  .row
+    h2
+      span.event.attribute "City"
+      span.city style="padding-left:20px"
+        = city
+  .container
+    .row.top-buffer
+      .col-lg-1.col-md-2.col-sm-2
+        span.event.attribute Events:
+      .col-lg-11.col-md-10.col-sm-6
+        .row
+          - events.each do |event|
+            .col-sm-12
+              .col-lg-1.col-md-2.col-sm-3
+                span.event.attribute Title:
+              .col-lg-1.col-md-2.col-sm-12
+                span.event.detail
+                  = event.title
+              .col-lg-1.col-md-2.col-sm-3
+                span.event.attribute DEscription:
+              .col-lg-1.col-md-2.col-sm-12
+                span.event.detail
+                  = event.description
