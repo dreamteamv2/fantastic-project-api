@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+
 require 'vcr'
 require 'webmock'
+
  # Setting up VCR
 class VcrHelper
   CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze

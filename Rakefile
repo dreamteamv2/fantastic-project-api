@@ -66,7 +66,7 @@ namespace :db do
     require 'sequel'
     require_relative 'config/environment.rb' # load config info
     require_relative 'spec/helpers/database_helper.rb'
-    def app; CodePraise::App; end
+    def app; FantasticProject::App; end
   end
 
   desc 'Run migrations'
@@ -89,8 +89,8 @@ namespace :db do
       return
     end
   
-    FileUtils.rm(CodePraise::App.config.DB_FILENAME)
-    puts "Deleted #{CodePraise::App.config.DB_FILENAME}"
+    FileUtils.rm(FantasticProject::App.config.DB_FILENAME)
+    puts "Deleted #{FantasticProject::App.config.DB_FILENAME}"
   end
  end
  
