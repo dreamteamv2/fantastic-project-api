@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'roda'
-require 'yaml'
+require 'econfig'
 
 module FantasticProject
   # Configuration for the App
