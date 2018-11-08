@@ -13,7 +13,7 @@ module FantasticProject
     route do |routing|
       routing.assets # load CSS
 
-      # GET /
+      # POST /
       routing.root do
         view 'home'
       end

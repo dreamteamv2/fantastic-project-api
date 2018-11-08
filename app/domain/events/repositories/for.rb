@@ -17,4 +17,4 @@ module FantasticProject
         end
       end
     end
-  end
+end
