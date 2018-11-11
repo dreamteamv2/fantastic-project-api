@@ -5,15 +5,19 @@ require 'dry-struct'
 
 module FantasticProject
   module Entity
-    # Domain entity for any event
+    # Domain entity any event
     class Event < Dry::Struct
       include Dry::Types.module
 
-      attribute :id,          Integer.optional
-      attribute :title,       Strict::String
+      attribute :id, Integer.optional
+      attribute :title, Strict::String
       attribute :description, Strict::String
-      attribute :category,    Strict::String
-      attribute :labels,      Strict::String
+      attribute :category, Strict::String
+      attribute :labels, Strict::String
+
+      def to_attr_hash
+        to_hash.reject { |key, _| [:id].include? key}
+      end
     end
   end
 end
