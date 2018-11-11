@@ -22,3 +22,4 @@ module FantasticProject
       def initialize(data)
         @event_data = data
       end
+

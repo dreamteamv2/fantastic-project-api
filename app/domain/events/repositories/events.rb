@@ -16,5 +16,3 @@ module FantasticProject
 
       def self.rebuild_entity(db_record)
         return nil unless db_record
-
-

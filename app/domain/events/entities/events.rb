@@ -12,8 +12,6 @@ module FantasticProject
       attribute :id, Integer.optional
       attribute :title, Strict::String
       attribute :description, Strict::String
-      attribute :category, Strict::String
-      attribute :labels, Strict::String
 
       def to_attr_hash
         to_hash.reject { |key, _| [:id].include? key}
