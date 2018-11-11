@@ -8,3 +8,19 @@ module FantasticProject
     class Errors
       NotFileFoundend = Class.new(StandardError)
     end
+
+    def initialize(config = FantasticProject::App.config)
+      @countries = LocalData::File.new(config.COUNTRIES_FILE_PATH)
+    end
+
+    def countries
+      raise Errors::NotFileFoundend unless exits_repo?
+
+      @countries.to_hash
+    end
+
+    def exits_repo?
+      @countries.exists?
+    end
+  end
+end

@@ -23,3 +23,23 @@ module FantasticProject
         @event_data = data
       end
 
+      def build_entity
+        Entity::Event.new(
+          id: nil,
+          title: title,
+          description: description
+        )
+      end
+       private
+       def origin_id
+        @data['id']
+      end
+       def title
+        @event_data['title']
+      end
+       def description
+        @event_data['description']
+      end
+    end
+  end
+end

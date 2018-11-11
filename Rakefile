@@ -48,6 +48,23 @@ namespace :db do
     DatabaseHelper.wipe_database
   end
 
+  desc 'Delete dev or test database file'
+  task :drop => :config do
+    if @app.environment == :production
+      puts 'Cannot remove production database!'
+      return
+    end
+
+    FileUtils.rm(@app.config.DB_FILENAME)
+    puts "Deleted #{@app.config.DB_FILENAME}"
+  end
+end
+
+desc 'Run application console (pry)'
+task :console do
+  sh 'pry -r ./init.rb'
+end
+
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do
@@ -69,7 +86,6 @@ namespace :quality do
 
   task :reek do
     sh "reek #{CODE}"
-
   end
 
   task :flog do

@@ -76,7 +76,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    method_source (0.9.0)
+    method_source (0.9.1)
     minitest (5.11.3)
     minitest-rg (5.2.0)
       minitest (~> 5.0)
@@ -85,7 +85,7 @@ GEM
       ast (~> 2.4.0)
     path_expander (1.0.3)
     powerpack (0.1.2)
-    pry (0.11.3)
+    pry (0.12.0)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
@@ -161,9 +161,10 @@ DEPENDENCIES
   flog
   hirb
   http (~> 3.0)
+  json
   minitest (~> 5.11)
   minitest-rg (~> 5.2)
-  pry (~> 0.11)
+  pry
   puma (~> 3.11)
   rake
   reek
@@ -179,7 +180,7 @@ DEPENDENCIES
   webmock (~> 3.4)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.5.3p105
 
 BUNDLED WITH
    1.17.1

@@ -28,8 +28,13 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+group :production do
+  gem 'database_cleaner'
+end 
+
 # Debugging
 gem 'debase'
+gem 'pry'
 gem 'ruby-debug-ide'
 
 # Testing

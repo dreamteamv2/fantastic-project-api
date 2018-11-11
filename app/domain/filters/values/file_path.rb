@@ -6,4 +6,13 @@ module FantasticProject
       # rubocop:disable Style/RedundantSelf
       FILE_PATH_REGEX = %r{(?<directory>.*\/)(?<filename>[^\/]+)}
 
-      attr_reader :directory, :filename
+      attr_reader :directory, :
+      
+      def initialize(filepath)
+        super(filepath)
+        parse_path
+      end
+
+    end
+  end
+end

@@ -20,3 +20,20 @@ module FantasticProject
     def filename
         @file['name']
     end
+
+    def countries
+      get_countries(@file['file_path'])
+    end
+
+    def get_countries(objects)
+      objects.map do |country|
+        Entity::Country.new(
+          name: country['name'],
+          alpha2: country['alpha2'],
+          country_code: country['country-code']
+        )
+      end
+    end
+  end
+end
+end

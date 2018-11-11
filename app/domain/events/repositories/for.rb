@@ -9,3 +9,14 @@ module FantasticProject
       ENTITY_REPOSITORY = {
         Entity::Event => Events
       }.freeze
+
+      def self.klass(entity_klass)
+        ENTITY_REPOSITORY[entity_klass]
+      end
+
+      def self.entity(entity_object)
+        ENTITY_REPOSITORY[entity_object.class]
+      end
+    end
+  end
+end
