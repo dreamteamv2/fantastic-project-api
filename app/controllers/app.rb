@@ -2,14 +2,19 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module FantasticProject
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, path: 'app/views/assets',
-                    css: 'style.css', js: 'table_row.js'    
     plugin :halt
+    plugin :flash
+    plugin :all_verbs
+    plugin :render, engine: 'slim', views: 'app/presentation/views'
+    plugin :assets, path: 'app/presentation/assets',
+                    css: 'style.css', js: 'table_row.js'
+
+    use Rack::MethodOverride 
 
     route do |routing|
       routing.assets # load CSS
