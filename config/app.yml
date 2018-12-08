@@ -1,18 +1,13 @@
 ---
 development:
-  #Infrastructure
   DB_FILENAME: app/infrastructure/database/local/dev.db
-  COUNTRIES_FILE_PATH: app/infrastructure/local/json_files/countries.json
-  #Application
-  APP_HOST: http://localhost:9000
+  COUNTRIES_FILE_PATH: app/infrastructure/local_files/json_files/countries.json
+  CATEGORIES_FILE_PATH: app/infrastructure/local_files/json_files/categories.json
+  IMAGE_PATH: app/presentations/views/assets/img/
 
 test:
-  # Infrastructure
   DB_FILENAME: app/infrastructure/database/local/test.db
   COUNTRIES_FILE_PATH: app/infrastructure/local/json_files/countries.json
-  # Application
-  APP_HOST: http://localhost:9000
 
 production:
-  # Infrastructure
   COUNTRIES_FILE_PATH: app/infrastructure/local/json_files/countries.json

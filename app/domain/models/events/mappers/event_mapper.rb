@@ -8,18 +8,17 @@ module FantasticProject
         @token = token
         @gateway_class = gateway_class
         @gateway = @gateway_class.new(@token)
-        @events = []
       end
 
       def find(params)
-        @events = @gateway.search_events(params)
-        clean_events.map do |data|
-          DataMapper.new(data).build_entity
+        result = @gateway.search_events(params)
+        if !result.nil?
+          result.map do |data|
+            DataMapper.new(data).build_entity
+          end
+        else
+          []
         end
-      end
-
-      def clean_events
-        @events.nil? ? [] : @events
       end
     end
 

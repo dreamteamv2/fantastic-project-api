@@ -7,9 +7,11 @@ Sequel.migration do
     create_table(:events) do
       primary_key :id
 
-      Integer     :origin_id, unique: true
+      String      :origin_id, unique: true
+      String      :country_code, null: false
+      String      :category, null: false
       String      :title, unique: true, null: false
-      String      :description
+      String      :description, null: true
 
       DateTime :created_at
       DateTime :updated_at

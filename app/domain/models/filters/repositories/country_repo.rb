@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
-# Image repo is responsible for get the country info
 module FantasticProject
-  # ImageRepo over local and remote git repo infrastructure
+  # Maps over local and remote git repo infrastructure
   class ImageRepo
     MAX_SIZE = 1000 # for cloning, analysis, summaries, etc.
 
-    # Errors is responsible handler error
     class Errors
-      # Errors is responsible handler error
       ImageNoFound = Class.new(StandardError)
     end
 
