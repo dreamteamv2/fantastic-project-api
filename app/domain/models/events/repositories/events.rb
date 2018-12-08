@@ -4,6 +4,7 @@ module FantasticProject
   module Repository
     # Repository events
     class Events
+
       def self.all
         Database::EventOrm.all.map { |db_event| rebuild_entity(db_event) }
       end
