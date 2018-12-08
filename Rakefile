@@ -6,23 +6,103 @@ task :default do
   puts `rake -T`
 end
 
-desc 'run tests'
-task :spec do
-  sh 'ruby spec/phq_api_spec.rb'
+desc 'desc 'Run unit and integration tests'
+Rake::TestTask.new(:spec) do |t|
+  t.pattern = 'spec/*_spec.rb'
+  t.warning = false
 end
 
-desc 'Keep rerunning tests upon changes'
+desc 'Run acceptance tests'
+task :spec_accept do
+  puts 'NOTEL run 'rake run:test' in another process'
+  sh 'ruby spec/acceptance_spec_.rb'
+end
+
+desc 'Keep rerunning unit/integration tests upon change'
 task :respec do
   sh "rerun -c 'rake spec' --ignore 'coverage/*'"
 end
 
+desc 'Keep restarting web app upon changes'
 task :rerack do
   sh "rerun -c rackup --ignore 'coverage/*'"
+end
+
+namespace :run do
+  task :dev do
+    sh 'rerun -c "rackup -p 9292"'
+  end
+
+  task :test do
+    sh 'RACK_ENV=test rackup -p 9000'
+  end
 end
 
 desc 'Run application in development mode and port'
 task :run_dev do
   sh 'rerun -c "rackup -p 9292"'
+end
+
+namespace :db do
+  task :config do
+    require 'sequel'
+    require_relative 'config/environment.rb' # load config info
+    @app = FantasticProject::App
+  end
+
+  desc 'Run migrations'
+  task :migrate => :config do
+    Sequel.extension :migration
+    puts "Migrating #{@app.environment} database to latest"
+    Sequel::Migrator.run(@app.DB, 'app/infrastructure/database/migrations')
+  end
+
+  desc 'Wipe records from all tables'
+  task :wipe => :config do
+    require_relative 'spec/helpers/database_helper.rb'
+    DatabaseHelper.setup_database_cleaner
+    DatabaseHelper.wipe_database
+  end
+
+  desc 'Delete dev or test database file'
+  task :drop => :config do
+    if @app.environment == :production
+      puts 'Cannot remove production database!'
+      return
+    end
+
+    FileUtils.rm(@app.config.DB_FILENAME)
+    puts "Deleted #{@app.config.DB_FILENAME}"
+  end
+end
+
+namespace :repostore do
+  task :config do
+    require_relative 'config/environment.rb' # load config info
+    @app =FantasticProject::App
+   end
+ 
+   desc 'Create director for repo store'
+   task :create => :config do
+     puts `mkdir #{@app.config.REPOSTORE_PATH}`
+   end
+ 
+  desc 'Delete cloned repos in repo store'
+  task :wipe => :config do
+    sh "rm -rf #{@app.config.REPOSTORE_PATH}/*" do |ok, _|
+      puts(ok ? 'Cloned repos deleted' : 'Could not delete cloned repos')
+    end
+  end
+
+  desc 'List cloned repos in repo store'
+  task :list => :config do
+    puts `ls #{@app.config.REPOSTORE_PATH}`
+  end
+end
+
+desc 'Run application console (pry)'
+task :console do
+  sh 'pry -r ./init.rb'
 end
 
 namespace :vcr do
@@ -35,7 +115,7 @@ namespace :vcr do
 end
 
 namespace :quality do
-  CODE = 'infrastructure/ domain/'
+  CODE = 'app/'
 
   desc 'run all quality checks'
   task :all => [:rubocop, :reek, :flog]
@@ -45,7 +125,7 @@ namespace :quality do
   end
 
   task :reek do
-    sh 'reek'
+    sh "reek #{CODE}"
   end
 
   task :flog do
