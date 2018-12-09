@@ -1,0 +1,70 @@
+doctype html
+html lang='en' 
+  head
+    /! Required meta tags
+    meta charset='utf-8' /
+    meta content='IE=edge' http-equiv='X-UA-Compatible' /
+    meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport' /
+    meta content='Colorlib' name='author' /
+    meta content='#' name='description' /
+    meta content='#' name='keywords' /
+    title Eventix
+
+    // Roboto fonts
+    link{
+      rel='stylesheet' 
+      href='https://fonts.googleapis.com/css?family=Quicksand' 
+      crossorigin='anonymous'
+    }
+
+    // Custom CSS and JS
+    == assets(:css)
+    == assets(:js)
+
+  body
+    .nav-menu
+      .bg.transition
+        .container-fluid.fixed
+          .row
+            .col-md-12
+              nav.navbar.navbar-expand-lg.navbar-light
+                a.navbar-brand href='/'  Eventix
+
+      
+    section
+      include :flash_bar
+    
+    == yield
+
+    /! ============================= FOOTER =============================
+    footer.main-block.dark-bg
+      .container
+        .row
+          .col-md-12
+            .copyright
+              /! Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+              p
+                | template is made with
+                i.ti-heart aria-hidden='true' 
+                |  by 
+                a href='https://colorlib.com' target='_blank'  Colorlib
+              /! Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+              ul
+                li
+                  a href='#' 
+                    span.ti-facebook
+                li
+                  a href='#' 
+                    span.ti-twitter-alt
+                li
+                  a href='#' 
+                    span.ti-instagram
+    
+    javascript:
+      $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+          $('.fixed').addClass('is-sticky');
+        } else {
+           $('.fixed').removeClass('is-sticky');
+        };
+      });

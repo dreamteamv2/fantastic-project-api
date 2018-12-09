@@ -1,0 +1,77 @@
+
+    /! SLIDER
+    section.slider.d-flex.align-items-center
+      /! <img src="images/slide.jpg" class="img-fluid" alt="#"
+      .container
+        .row.d-flex.justify-content-center
+          .col-md-12
+            .slider-title_box
+              .row
+                .col-md-12
+                  .slider-content_wrap
+                    h1 Discover great places around the World!
+                    h5
+                      | Let's uncover the best things to do, eat, drink, and shop
+                      | , in your next trip.
+              .row.d-flex.justify-content-center
+                .col-md-10
+                  form.form-wrap.mt-4 action="/events" method='POST'
+                    .btn-group aria-label=("Basic example") role="group" 
+                      input.btn-group1 placeholder=("What are your looking for?") name="category" type="text" /
+                      input.btn-group2 placeholder=("Country, ex: Taiwan") name="country" type="text" /
+                      button.btn-form type="submit" 
+                        span.icon-magnifier.search-icon
+                        | SEARCH
+                        i.pe-7s-angle-right
+                  
+    /! // SLIDER
+    /! //END HEADER
+    /! ============================= FIND EVENTS =============================
+    section.main-block
+      .container
+        .row.justify-content-center
+          .col-md-5
+            .styled-heading
+              h3 What do you wanna find?
+        .row
+          .col-md-4
+            .find-place-img_wrap
+              .grid
+                figure.effect-ruby
+                  img.img-fluid alt="img13" src="images/find-place1.jpg" /
+                  figcaption
+                    h5 Concerts
+          .col-md-4
+            .row.find-img-align
+              .col-md-12
+                .find-place-img_wrap
+                  .grid
+                    figure.effect-ruby
+                      img.img-fluid alt="img13" src="images/find-place2.jpg" /
+                      figcaption
+                        h5 Food
+            .row
+              .col-md-12
+                .find-place-img_wrap
+                  .grid
+                    figure.effect-ruby
+                      img.img-fluid alt="img13" src="images/find-place3.jpg" /
+                      figcaption
+                        h5 Outdoors
+          .col-md-4
+            .row.find-img-align
+              .col-md-12
+                .find-place-img_wrap
+                  .grid
+                    figure.effect-ruby
+                      img.img-fluid alt="img13" src="images/find-place4.jpg" /
+                      figcaption
+                        h5 Hotels
+            .row
+              .col-md-12
+                .find-place-img_wrap
+                  .grid
+                    figure.effect-ruby
+                      img.img-fluid alt="img13" src="images/find-place5.jpg" /
+                      figcaption
+                        h5 Art & Culture

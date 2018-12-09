@@ -1,0 +1,50 @@
+
+    /! SLIDER
+    section.slider-result.d-flex.align-items-center
+      .container
+        .row.d-flex.justify-content-center
+          .col-md-12
+            .slider-title_box
+              .row
+                .col-md-12
+                  .slider-content_wrap
+                    h1 Results
+                    h5
+                      | Let's uncover the best things to do, eat, drink, and shop
+                      | , in your next trip.
+                  
+
+    /! //END FIND EVENTS
+    /! ============================= FEATURED EVENTS =============================
+    section.main-block.light-bg
+      .container
+        .row.justify-content-center
+          .col-md-5
+            .styled-heading
+              h3 Featured Events
+
+        - events.each do |event|
+          .row
+            .col-md-12.featured-responsive.featured-place-wrap
+                .image.col-md-4.float-left
+                  img.img-fluid alt="#" src="/images/featured4.jpg" /
+                .featured-title-box.col-md-8.float-left
+                  h6 #{event.title}
+                  p #{event.country}
+                  ul
+                    li
+                      span.icon-screen-smartphone
+                      p #{event.description}
+                    span.ti-heart
+                    span.ti-bookmark
+          
+
+
+    section.main-block.light-bg
+      .container
+        .row
+          .col-md-12
+            .add-listing-wrap
+              h2 Reach millions of People
+    /! //END ADD LISTING
+  
