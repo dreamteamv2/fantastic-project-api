@@ -26,16 +26,16 @@ end
 
 desc 'Keep restarting web app upon changes'
 task :rerack do
-  sh "rerun -c rackup --ignore 'coverage/*'"
+  sh "rerun -c 'puma config.ru -p 9090' --ignore 'coverage/*'"
 end
 
 namespace :run do
   task :dev do
-    sh 'rerun -c "rackup -p 9292"'
+    sh 'puma config.ru -p 9090'
   end
 
   task :test do
-    sh 'RACK_ENV=test rackup -p 9000'
+    sh 'RACK_ENV=test puma config.ru -p 9090'
   end
 end
 
@@ -82,6 +82,46 @@ namespace :vcr do
   task :wipe do
     sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
       puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+    end
+  end
+end
+
+namespace :cache do
+  task :config do
+    require_relative 'config/environment.rb' # load config info
+    require_relative 'app/infrastructure/cache/init.rb' # load cache client
+    @api = FantasticProject::Api
+  end
+
+  namespace :list do
+    task :dev do
+      puts 'Finding development cache'
+      list = `ls _cache`
+      puts 'No local cache found' if list.empty?
+      puts list
+    end
+
+    task :production => :config do
+      puts 'Finding production cache'
+      keys = FantasticProject::Cache::Client.new(@api.config).keys
+      puts 'No keys found' if keys.none?
+      keys.each { |key| puts "Key: #{key}" }
+    end
+  end
+
+  namespace :wipe do
+    task :dev do
+      puts 'Deleting development cache'
+      sh 'rm -rf _cache/*'
+    end
+
+    task :production => :config do
+      print 'Are you sure you wish to wipe the production cache? (y/n) '
+      if STDIN.gets.chomp.casecmp('y').zero?
+        puts 'Deleting production cache'
+        wiped = FantasticProject::Cache::Client.new(@api.config).wipe
+        wiped.keys.each { |key| puts "Wiped: #{key}" }
+      end
     end
   end
 end
