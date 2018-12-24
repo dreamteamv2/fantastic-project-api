@@ -4,7 +4,7 @@ require 'roda'
 require_relative 'lib/init'
 
 module FantasticProject
-  # Web App
+  # Web Api
   class Api < Roda
     include RouteHelpers
 
