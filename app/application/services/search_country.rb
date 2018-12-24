@@ -60,7 +60,7 @@ module FantasticProject
 
       def filter_country(input)
         country = Mapper::CountriesMapper
-          .new(App.config.COUNTRIES_FILE_PATH)
+          .new(Api.config.COUNTRIES_FILE_PATH)
           .find(input[:country])
 
         country[0]
@@ -70,7 +70,7 @@ module FantasticProject
 
       def filter_category(input)
         Mapper::CagegoriesMapper
-          .new(App.config.CATEGORIES_FILE_PATH)
+          .new(Api.config.CATEGORIES_FILE_PATH)
           .find(input[:category])
       rescue StandardError
         raise 'Could not find category repository'
@@ -88,7 +88,7 @@ module FantasticProject
           category: input[:category].downcase
         }
         PredictHQ::EventMapper
-          .new(App.config.PHQ_TOKEN)
+          .new(Api.config.PHQ_TOKEN)
           .find(params)
       end
 

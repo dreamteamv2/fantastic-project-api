@@ -12,7 +12,7 @@ module FantasticProject
       ImageNoFound = Class.new(StandardError)
     end
 
-    def initialize(image_id, config = CodePraise::App.config)
+    def initialize(image_id, config = CodePraise::Api.config)
       @image_id = image_id
       @local = Image::LocalImage.new(image_id, config.IMAGEREPO_PATH)
     end

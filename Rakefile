@@ -26,16 +26,16 @@ end
 
 desc 'Keep restarting web app upon changes'
 task :rerack do
-  sh "rerun -c rackup --ignore 'coverage/*'"
+  sh "rerun -c 'puma config.ru -p 9090' --ignore 'coverage/*'"
 end
 
 namespace :run do
   task :dev do
-    sh 'rerun -c "rackup -p 9292"'
+    sh 'puma config.ru -p 9090'
   end
 
   task :test do
-    sh 'RACK_ENV=test rackup -p 9000'
+    sh 'RACK_ENV=test puma config.ru -p 9090'
   end
 end
 
@@ -43,14 +43,14 @@ namespace :db do
   task :config do
     require 'sequel'
     require_relative 'config/environment.rb' # load config info
-    @app = FantasticProject::App
+    @api = FantasticProject::Api
   end
 
   desc 'Run migrations'
   task :migrate => :config do
     Sequel.extension :migration
-    puts "Migrating #{@app.environment} database to latest"
-    Sequel::Migrator.run(@app.DB, 'app/infrastructure/database/migrations')
+    puts "Migrating #{@api.environment} database to latest"
+    Sequel::Migrator.run(@api.DB, 'app/infrastructure/database/migrations')
   end
 
   desc 'Wipe records from all tables'
@@ -62,13 +62,13 @@ namespace :db do
 
   desc 'Delete dev or test database file'
   task :drop => :config do
-    if @app.environment == :production
+    if @api.environment == :production
       puts 'Cannot remove production database!'
       return
     end
 
-    FileUtils.rm(@app.config.DB_FILENAME)
-    puts "Deleted #{@app.config.DB_FILENAME}"
+    FileUtils.rm(@api.config.DB_FILENAME)
+    puts "Deleted #{@api.config.DB_FILENAME}"
   end
 end
 
@@ -86,8 +86,48 @@ namespace :vcr do
   end
 end
 
+namespace :cache do
+  task :config do
+    require_relative 'config/environment.rb' # load config info
+    require_relative 'app/infrastructure/cache/init.rb' # load cache client
+    @api = FantasticProject::Api
+  end
+
+  namespace :list do
+    task :dev do
+      puts 'Finding development cache'
+      list = `ls _cache`
+      puts 'No local cache found' if list.empty?
+      puts list
+    end
+
+    task :production => :config do
+      puts 'Finding production cache'
+      keys = FantasticProject::Cache::Client.new(@api.config).keys
+      puts 'No keys found' if keys.none?
+      keys.each { |key| puts "Key: #{key}" }
+    end
+  end
+
+  namespace :wipe do
+    task :dev do
+      puts 'Deleting development cache'
+      sh 'rm -rf _cache/*'
+    end
+
+    task :production => :config do
+      print 'Are you sure you wish to wipe the production cache? (y/n) '
+      if STDIN.gets.chomp.casecmp('y').zero?
+        puts 'Deleting production cache'
+        wiped = FantasticProject::Cache::Client.new(@api.config).wipe
+        wiped.keys.each { |key| puts "Wiped: #{key}" }
+      end
+    end
+  end
+end
+
 namespace :quality do
-  CODE = 'app/'
+  CODE = 'app'
 
   desc 'run all quality checks'
   task :all => [:rubocop, :reek, :flog]

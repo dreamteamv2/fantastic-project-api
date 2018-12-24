@@ -3,6 +3,8 @@
 *.db
 .bundle/
 /coverage/
+_cache/
+ _snippets/
 /InstalledFiles
 /pkg/
 /spec/reports/
