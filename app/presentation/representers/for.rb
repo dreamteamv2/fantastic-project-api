@@ -5,7 +5,7 @@ require_relative 'project_folder_contributions_representer'
 require_relative 'project_representer'
 require_relative 'http_response_representer'
 
-module CodePraise
+module FantasticProject
   module Representer
     # For representer class
     class For
