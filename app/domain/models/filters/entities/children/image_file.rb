@@ -13,7 +13,6 @@ module FantasticProject
       attribute :description, Strict::String
       attribute :file, Strict::String
       attribute :url, Strict::String
-
     end
   end
 end

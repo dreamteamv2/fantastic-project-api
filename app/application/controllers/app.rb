@@ -23,6 +23,8 @@ module FantasticProject
 
     use Rack::MethodOverride
 
+    # rubocop:disable Metrics/BlockLength
+    # rubocop:disable Style/BlockComments
     route do |routing|
       routing.public
       routing.assets # load CSS
@@ -103,5 +105,7 @@ module FantasticProject
         end
       end
     end
+    # rubocop:enable Metrics/BlockLength
+    # rubocop:enable Style/BlockComments
   end
 end

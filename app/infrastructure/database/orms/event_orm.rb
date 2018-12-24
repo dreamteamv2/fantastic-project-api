@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+
 require 'sequel'
 
+# Database module
 module FantasticProject
-  # database
+  # Databbase module for events entities
   module Database
     # Object Relational Mapper for Event Entities
     class EventOrm < Sequel::Model(:events)

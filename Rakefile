@@ -6,19 +6,20 @@ task :default do
   puts `rake -T`
 end
 
-desc 'desc 'Run unit and integration tests'
+desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
-  t.pattern = 'spec/*_spec.rb'
+  t.pattern = 'spec/**/*_spec.rb'
   t.warning = false
 end
 
 desc 'Run acceptance tests'
-task :spec_accept do
-  puts 'NOTEL run 'rake run:test' in another process'
-  sh 'ruby spec/acceptance_spec_.rb'
+# NOTE: run `rake run:test` in another process
+Rake::TestTask.new(:spec_accept) do |t|
+  t.pattern = 'spec/tests_acceptance/*_acceptance.rb'
+  t.warning = false
 end
 
-desc 'Keep rerunning unit/integration tests upon change'
+desc 'Keep rerunning unit/integration tests upon changes'
 task :respec do
   sh "rerun -c 'rake spec' --ignore 'coverage/*'"
 end
@@ -36,11 +37,6 @@ namespace :run do
   task :test do
     sh 'RACK_ENV=test rackup -p 9000'
   end
-end
-
-desc 'Run application in development mode and port'
-task :run_dev do
-  sh 'rerun -c "rackup -p 9292"'
 end
 
 namespace :db do
@@ -73,30 +69,6 @@ namespace :db do
 
     FileUtils.rm(@app.config.DB_FILENAME)
     puts "Deleted #{@app.config.DB_FILENAME}"
-  end
-end
-
-namespace :repostore do
-  task :config do
-    require_relative 'config/environment.rb' # load config info
-    @app =FantasticProject::App
-   end
- 
-   desc 'Create director for repo store'
-   task :create => :config do
-     puts `mkdir #{@app.config.REPOSTORE_PATH}`
-   end
- 
-  desc 'Delete cloned repos in repo store'
-  task :wipe => :config do
-    sh "rm -rf #{@app.config.REPOSTORE_PATH}/*" do |ok, _|
-      puts(ok ? 'Cloned repos deleted' : 'Could not delete cloned repos')
-    end
-  end
-
-  desc 'List cloned repos in repo store'
-  task :list => :config do
-    puts `ls #{@app.config.REPOSTORE_PATH}`
   end
 end
 

@@ -4,27 +4,27 @@ require 'http'
 require 'cgi'
 
 module FantasticProject
-  module Unsplash
+  module PredictHQ
     # Library for PredictHQ Web API
     class Api
-      def initialize(client_id)
-        @client_id = client_id
+      def initialize(token)
+        @phq_token = token
       end
 
-      def search_images(params)
-        Request.new(@client_id).query(params).parse['results']
+      def search_events(params)
+        Request.new(@phq_token).event(params).parse['results']
       end
 
       # Sends out HTTP requests to PredictHQ
       class Request
-        API_PATH = 'https://api.unsplash.com/'.freeze
-        EVENT_ENDPOINT = '/search/photos?'.freeze
+        API_PATH = 'https://api.predicthq.com/v1/'.freeze
+        EVENT_ENDPOINT = 'events/?'.freeze
 
-        def initialize(client_id)
-          @client_id = client_id
+        def initialize(token)
+          @token = token
         end
 
-        def query(params)
+        def event(params)
           query = CGI.unescape(URI.encode_www_form(params))
           get(API_PATH + EVENT_ENDPOINT + query)
         end
@@ -32,7 +32,7 @@ module FantasticProject
         def get(url)
           http_response = HTTP.headers(
             'Accept' => 'application/json',
-            'Authorization' => "Bearer #{@client_id}"
+            'Authorization' => "Bearer #{@token}"
           ).get(url)
 
           Response.new(http_response).tap do |response|
