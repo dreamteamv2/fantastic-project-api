@@ -6,8 +6,6 @@ require_relative 'lib/init'
 module FantasticProject
   # Web Api
   class Api < Roda
-    include RouteHelpers
-
     plugin :halt
     plugin :all_verbs
     plugin :caching

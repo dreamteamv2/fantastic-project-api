@@ -5,7 +5,7 @@ require 'redis-rack-cache'
 require 'roda'
 require 'econfig'
 
-module CodePraise
+module FantasticProject
   # Environment-specific configuration
   class Api < Roda
     plugin :environments

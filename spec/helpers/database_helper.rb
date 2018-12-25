@@ -11,8 +11,8 @@ class DatabaseHelper
   end
 
   def self.wipe_database
-    CodePraise::Api.DB.run('PRAGMA foreign_keys = OFF')
+    FantasticProject::Api.DB.run('PRAGMA foreign_keys = OFF')
     DatabaseCleaner.clean
-    CodePraise::Api.DB.run('PRAGMA foreign_keys = ON')
+    FantasticProject::Api.DB.run('PRAGMA foreign_keys = ON')
   end
 end

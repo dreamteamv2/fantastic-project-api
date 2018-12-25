@@ -16,10 +16,10 @@ require_relative '../../init.rb'
 
 CATEGORY='sports'
 COUNTRY='argentina'
-GITHUB_TOKEN = CodePraise::Api.config.PHQ_TOKEN
+GITHUB_TOKEN = FantasticProject::Api.config.PHQ_TOKEN
 CORRECT = YAML.safe_load(File.read('spec/fixtures/phq_results.yml'))
 
 # Helper methods
 def homepage
-  CodePraise::Api.config.APP_HOST
+  FantasticProject::Api.config.APP_HOST
 end
