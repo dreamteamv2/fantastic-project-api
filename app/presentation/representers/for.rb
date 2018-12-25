@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'projects_representer'
-require_relative 'project_folder_contributions_representer'
-require_relative 'project_representer'
+require_relative 'event_representer'
+require_relative 'events_representer'
 require_relative 'http_response_representer'
 
 module FantasticProject

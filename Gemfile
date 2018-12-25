@@ -71,7 +71,7 @@ gem 'rack-test' # can also be used to diagnose production
 group :development, :test do
   gem 'flog'
   gem 'reek'
-  gem 'rubocop'
+  gem 'rubocop' , '~> 0.61.1'
 end
 
 # UTILITIES
