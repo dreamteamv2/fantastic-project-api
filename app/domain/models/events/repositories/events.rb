@@ -17,8 +17,13 @@ module FantasticProject
           country_code: db_record.country_code,
           category: db_record.category,
           title: db_record.title,
-          description: db_record.description
+          description: db_record.description,
         )
+      end
+
+      def self.find_id(id)
+        db_record = Database::EventOrm.first(id: id)
+        rebuild_entity(db_record)
       end
 
       def self.rebuild_many(db_records)

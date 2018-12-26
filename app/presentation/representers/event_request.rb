@@ -7,8 +7,7 @@ module FantasticProject
     class EventsRequest < Roar::Decorator
       include Roar::JSON
 
-      property :country_code
-      property :category
+      property :event
       property :id
     end
   end

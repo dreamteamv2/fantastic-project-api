@@ -5,7 +5,7 @@ require "dry/transaction"
 module FantasticProject
   module Service
     # Transaction to store project from Github API to database
-    class SearchCountry
+    class EventList
       include Dry::Transaction
 
       step :check_country
@@ -27,7 +27,7 @@ module FantasticProject
                   category: input[:category].downcase,
                   request_id: input[:request_id])
         else
-          Failure(Value::Result.new(status: :internal_error, message: GET_INFO_ERR))
+          Failure(Value::Result.new(status: :bad_request, message: GET_INFO_ERR))
         end
       end
 
@@ -35,7 +35,7 @@ module FantasticProject
         if filter_category(input).any?
           Success(input)
         else
-          Failure(Value::Result.new(status: :internal_error, message: GET_INFO_ERR))
+          Failure(Value::Result.new(status: :bad_request, message: GET_INFO_ERR))
         end
       end
 

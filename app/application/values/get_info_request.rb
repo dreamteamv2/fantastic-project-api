@@ -2,6 +2,6 @@
 
 module FantasticProject
   module Value
-    GetInfoRequest = Struct.new :country_code, :category, :id
+    GetInfoRequest = Struct.new :event, :id
   end
 end
