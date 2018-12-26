@@ -298,7 +298,7 @@ DEPENDENCIES
   rerun
   roar
   roda (~> 3.8)
-  rubocop (~> 0.61.1)
+  rubocop
   sequel (~> 5.13)
   shoryuken (~> 4)
   simplecov (~> 0.16)

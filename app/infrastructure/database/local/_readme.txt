@@ -1,1 +1,1 @@
-For development and test databases.
+This folder holds development and test databases
