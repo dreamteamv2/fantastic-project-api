@@ -11,7 +11,10 @@ module FantasticProject
     plugin :caching
     use Rack::MethodOverride
 
+    plugin :public, root: "./public"
+
     route do |routing|
+      routing.public
       response["Content-Type"] = "application/json"
 
       # GET /
@@ -43,16 +46,11 @@ module FantasticProject
           end
 
           routing.on Integer do |id|
-
             # GET /events/{id}
             routing.get do
-              testp = Mapper::ImageFileMapper
-                .new("taiwan", Api.config.UNSPLASH_KEY)
-                .load_data
+              Cache::Control.new(response).turn_on if Env.new(Api).production?
 
-              Repository::ImageRepo.new("taiwan", Api.config, testp).download_images
               request_id = [request.env, request.path, Time.now.to_f].hash
-
               result = Service::Event.new.call(
                 id: id,
                 request_id: request_id,

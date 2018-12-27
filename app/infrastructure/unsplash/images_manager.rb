@@ -37,22 +37,31 @@ module FantasticProject
       def delete
         FileUtils.rm_rf(@download_path)
       end
+
+      def local_images
+        images = Dir.glob("#{@download_path}/*.jpg")
+      end
     end
 
     class DownloadFile
       def initialize(file, path)
         @name = file.origin_id
         @url = file.url
-        @path = path
+        @path = "#{path}/#{@name}.jpg"
+      end
+
+      def file_exists?
+        File.file? @path
       end
 
       def download
-        puts @url
-        open(@url) { |f|
-          File.open("#{@path}/#{@name}.jpg", "wb") do |file|
-            file.puts f.read
-          end
-        }
+        if !file_exists?
+          open(@url) { |f|
+            File.open(@path, "wb") do |file|
+              file.puts f.read
+            end
+          }
+        end
       end
     end
   end

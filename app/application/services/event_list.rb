@@ -106,21 +106,3 @@ module FantasticProject
     end
   end
 end
-
-=begin
-      def get_info_request_json(input)
-        Value::GetInfoRequest.new(input[:cdata].alpha2,
-                                  input[:category].downcase,
-                                  input[:request_id])
-          .yield_self { |request| Representer::EventsRequest.new(request) }
-          .yield_self(&:to_json)
-      end
-
-  Messaging::Queue.new(Api.config.GET_INFO_QUEUE_URL, Api.config)
-            .send(get_info_request_json(input))
-
-          Failure(
-            Value::Result.new(status: :processing,
-                              message: {request_id: input[:request_id]})
-          )
-=end

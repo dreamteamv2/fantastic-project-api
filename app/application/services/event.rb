@@ -10,6 +10,7 @@ module FantasticProject
 
       step :check_event
       step :request_images
+      step :event_info
 
       private
 
@@ -31,22 +32,47 @@ module FantasticProject
       end
 
       def request_images(input)
-        Messaging::Queue.new(Api.config.GET_INFO_QUEUE_URL, Api.config)
-          .send(get_info_request_json(input))
+        input[:country] = filter_country(input)
+        if Repository::ImageRepo.new(input[:country].name, Api.config).exists_locally?
+          Success(input)
+        else
+          Messaging::Queue.new(Api.config.GET_INFO_QUEUE_URL, Api.config)
+            .send(get_info_request_json(input))
 
-        Failure(
-          Value::Result.new(status: :processing,
-                            message: {request_id: input[:request_id]})
-        )
+          Failure(Value::Result.new(status: :processing,
+                                    message: {request_id: input[:request_id]}))
+        end
+      end
+
+      def event_info(input)
+        images = local_images(input)
+        Value::FullEvent.new(input[:event], images)
+          .yield_self do |data|
+          Success(Value::Result.new(status: :ok, message: data))
+        end
       end
 
       # Utility function
 
+      def filter_country(input)
+        country = Mapper::CountriesMapper
+          .new(Api.config.COUNTRIES_FILE_PATH)
+          .find_by_code(input[:event].country_code)
+        country[0]
+      rescue StandardError
+        raise "Could not find country repository"
+      end
+
       def get_info_request_json(input)
-        Value::GetInfoRequest.new(input[:event],
+        Value::GetInfoRequest.new(input[:country].name,
                                   input[:request_id])
-          .yield_self { |request| Representer::EventsRequest.new(request) }
+          .yield_self { |request| Representer::DownloadRequest.new(request) }
           .yield_self(&:to_json)
+      end
+
+      def local_images(input)
+        Repository::ImageRepo.new(input[:country].name, Api.config)
+          .local_images
       end
     end
   end

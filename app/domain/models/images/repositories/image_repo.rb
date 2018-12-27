@@ -20,6 +20,12 @@ module FantasticProject
         exists_locally? ? @local : raise(Errors::FolderNoFound)
       end
 
+      def local_images
+        images = @local.local_images.map do |image|
+          Entity::ImageFile.new(origin_id: "1", url: image.gsub!("public/", ""))
+        end
+      end
+
       def exists_locally?
         @local.exists?
       end

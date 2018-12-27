@@ -3,6 +3,7 @@
 require_relative "../app/domain/init.rb"
 require_relative "../app/application/values/init.rb"
 require_relative "../app/presentation/representers/init.rb"
+require_relative "../app/infrastructure/unsplash/init.rb"
 
 require_relative "progress_reporter.rb"
 require_relative "get_info_monitor.rb"
@@ -28,27 +29,28 @@ module GetInfo
     shoryuken_options queue: config.GET_INFO_QUEUE_URL, auto_delete: true
 
     def perform(_sqs_msg, request)
-      country_code, category, reporter = setup_job(request)
-      get_events(country_code, category, reporter)
+      tag, reporter = setup_job(request)
+      get_images(tag, reporter)
       each_second(5) { reporter.publish(GetInfoMonitor.finished_percent) }
     end
 
     private
 
     def setup_job(request)
-      event_request = FantasticProject::Representer::EventsRequest
+      download_request = FantasticProject::Representer::DownloadRequest
         .new(OpenStruct.new).from_json(request)
 
-      [event_request.country_code,
-       event_request.category,
-       ProgressReporter.new(Worker.config, event_request.id)]
+      [download_request.tag,
+       ProgressReporter.new(Worker.config, download_request.id)]
     end
 
-    def get_events(country_code, category, reporter)
-      params = {
-        country: country_code,
-        category: category,
-      }
+    def get_images(tag, reporter)
+      images = FantasticProject::Mapper::ImageFileMapper
+        .new(tag, Worker.config.UNSPLASH_KEY)
+        .load_data
+
+      FantasticProject::Repository::ImageRepo.new(tag, Worker.config, images)
+        .download_images
 
       reporter.publish GetInfoMonitor.progress("images")
     end

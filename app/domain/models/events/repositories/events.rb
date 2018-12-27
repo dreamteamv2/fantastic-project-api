@@ -22,7 +22,7 @@ module FantasticProject
       end
 
       def self.find_id(id)
-        db_record = Database::EventOrm.first(id: id)
+        db_record = Database::EventOrm[id]
         rebuild_entity(db_record)
       end
 
