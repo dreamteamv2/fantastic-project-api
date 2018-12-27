@@ -4,6 +4,7 @@ require 'http'
 
 module GetInfo
   # Reports progress as percent to Faye endpoint
+  # :reek:DuplicateMethodCall
   class ProgressReporter
     def initialize(config, channel_id)
       @config = config

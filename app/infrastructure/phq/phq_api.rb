@@ -31,7 +31,7 @@ module FantasticProject
 
         def get(url)
           http_response = HTTP.headers(
-            'Accept' => 'application/json',
+            'Accept'        => 'application/json',
             'Authorization' => "Bearer #{@token}"
           ).get(url)
 

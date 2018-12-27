@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-require "dry/transaction"
+require 'dry/transaction'
 
 module FantasticProject
   module Service
     # Transaction to store project from Github API to database
+
+    # :reek:DuplicateMethodCall
+    # :reek:FeatureEnvy
+    # :reek:UtilityFunction
     class Event
       include Dry::Transaction
 
@@ -14,14 +18,14 @@ module FantasticProject
 
       private
 
-      GET_INFO_ERR = "Could not find the event"
-      NO_EVENT_ERR = "Event not found"
-      DB_ERR = "Having trouble accessing the database"
+      GET_INFO_ERR = 'Could not find the event'
+      NO_EVENT_ERR = 'Event not found'
+      DB_ERR = 'Having trouble accessing the database'
 
       # :reek:NilCheck
       def check_event(input)
         input[:event] = Repository::For.klass(Entity::Event).find_id(
-          id: input[:id],
+          id: input[:id]
         )
 
         if input[:event]
@@ -31,18 +35,21 @@ module FantasticProject
         end
       end
 
+      # rubocop:disable Metrics/AbcSize
       def request_images(input)
         input[:country] = filter_country(input)
-        if Repository::ImageRepo.new(input[:country].name, Api.config).exists_locally?
+        if Repository::ImageRepo.new(input[:country].name, Api.config)
+            .exists_locally?
           Success(input)
         else
           Messaging::Queue.new(Api.config.GET_INFO_QUEUE_URL, Api.config)
             .send(get_info_request_json(input))
 
           Failure(Value::Result.new(status: :processing,
-                                    message: {request_id: input[:request_id]}))
+                                    message: { request_id: input[:request_id] }))
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       def event_info(input)
         images = local_images(input)
@@ -60,7 +67,7 @@ module FantasticProject
           .find_by_code(input[:event].country_code)
         country[0]
       rescue StandardError
-        raise "Could not find country repository"
+        raise 'Could not find country repository'
       end
 
       def get_info_request_json(input)

@@ -1,4 +1,3 @@
 {
-  "editor.formatOnSave": true,
   "ruby.format": "rubocop"
 }

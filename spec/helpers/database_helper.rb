@@ -3,6 +3,7 @@
 require 'database_cleaner'
 
 # Helper to clean database during test runs
+# :reek:DuplicateMethodCall
 class DatabaseHelper
   def self.setup_database_cleaner
     DatabaseCleaner.allow_remote_database_url = true

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "sequel"
+require 'sequel'
 
 Sequel.migration do
   change do

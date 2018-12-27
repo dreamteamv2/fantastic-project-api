@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "aws-sdk-sqs"
+require 'aws-sdk-sqs'
 
 module FantasticProject
+  # :reek:FeatureEnvy
   module Messaging
     ## Queue wrapper for AWS SQS
     # Requires: AWS credentials loaded in ENV or through config file
@@ -14,7 +15,7 @@ module FantasticProject
         sqs = Aws::SQS::Client.new(
           access_key_id: config.AWS_ACCESS_KEY_ID,
           secret_access_key: config.AWS_SECRET_ACCESS_KEY,
-          region: config.AWS_REGION,
+          region: config.AWS_REGION
         )
         @queue = Aws::SQS::Queue.new(url: queue_url, client: sqs)
       end

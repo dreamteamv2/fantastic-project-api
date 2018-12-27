@@ -1,33 +1,31 @@
 # frozen_string_literal: false
 
-require "http"
-require "cgi"
-require "open-uri"
-require "fileutils"
+require 'http'
+require 'cgi'
+require 'open-uri'
+require 'fileutils'
 
 module FantasticProject
+  # :reek:NestedIterators
   module Unsplash
     # Library for download images by  Web API link
     class ImagesManager
       def initialize(tag, path, files = nil)
         @files = files
-        @tag = tag.gsub(/[^0-9A-Za-z]/, "")
+        @tag = tag.gsub(/[^0-9A-Za-z]/, '')
         @download_path = "#{path}/#{tag}"
       end
 
       def download_files
-        if @files
-          check_folder
-          @files.map do |file|
-            DownloadFile.new(file, @download_path).download
-          end
+        false unless @files
+        check_folder
+        @files.map do |file|
+          DownloadFile.new(file, @download_path).download
         end
       end
 
       def check_folder
-        if !self.exists?
-          FileUtils.mkdir_p @download_path
-        end
+        FileUtils.mkdir_p @download_path unless exists?
       end
 
       def exists?
@@ -39,10 +37,11 @@ module FantasticProject
       end
 
       def local_images
-        images = Dir.glob("#{@download_path}/*.jpg")
+        Dir.glob("#{@download_path}/*.jpg")
       end
     end
 
+    # Download class
     class DownloadFile
       def initialize(file, path)
         @name = file.origin_id
@@ -54,15 +53,16 @@ module FantasticProject
         File.file? @path
       end
 
+      # rubocop:disable Security/Open
       def download
-        if !file_exists?
-          open(@url) { |f|
-            File.open(@path, "wb") do |file|
-              file.puts f.read
-            end
-          }
+        false unless file_exists?
+        open(@url) do |fcloud|
+          File.open(@path, 'wb') do |file|
+            file.puts fcloud.read
+          end
         end
       end
+      # rubocop:enable Security/Open
     end
   end
 end

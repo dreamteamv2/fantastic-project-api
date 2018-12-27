@@ -17,7 +17,7 @@ module FantasticProject
           country_code: db_record.country_code,
           category: db_record.category,
           title: db_record.title,
-          description: db_record.description,
+          description: db_record.description
         )
       end
 

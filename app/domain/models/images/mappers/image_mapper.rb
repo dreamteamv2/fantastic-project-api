@@ -31,18 +31,18 @@ module FantasticProject
           Entity::ImageFile.new(
             id: nil,
             origin_id: origin_id,
-            url: url,
+            url: url
           )
         end
 
         private
 
         def origin_id
-          @data["id"]
+          @data['id']
         end
 
         def url
-          @data["links"]["download"]
+          @data['links']['download']
         end
       end
     end

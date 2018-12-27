@@ -11,6 +11,7 @@ AllCops:
 # ignore block length in non-production code
 Metrics/BlockLength:
   Enabled: true
+  Max: 40
   Exclude:
     - spec/**/*
     - Rakefile
@@ -39,3 +40,9 @@ Layout/MultilineMethodCallIndentation:
 Layout/AlignHash:
   Enabled: true
   EnforcedHashRocketStyle: table
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 90
+  Exclude:
+    - Rakefile
