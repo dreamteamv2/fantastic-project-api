@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require "dry/transaction"
+require 'dry/transaction'
 
 module FantasticProject
   module Service
     # Transaction to store project from Github API to database
+
+    # :reek:FeatureEnvy
     class EventList
       include Dry::Transaction
 
@@ -16,7 +18,7 @@ module FantasticProject
 
       private
 
-      GET_INFO_ERR = "Could not find the events using the parameters"
+      GET_INFO_ERR = 'Could not find the events using the parameters'
 
       # :reek:NilCheck
       def check_country(input)
@@ -73,7 +75,7 @@ module FantasticProject
           .find(input[:country])
         country[0]
       rescue StandardError
-        raise "Could not find country repository"
+        raise 'Could not find country repository'
       end
 
       def filter_category(input)
@@ -81,7 +83,7 @@ module FantasticProject
           .new(Api.config.CATEGORIES_FILE_PATH)
           .find(input[:category])
       rescue StandardError
-        raise "Could not find category repository"
+        raise 'Could not find category repository'
       end
 
       # Utility functions
@@ -90,7 +92,7 @@ module FantasticProject
       def events_from_phq(input)
         params = {
           country: input[:cdata].alpha2,
-          category: input[:category].downcase,
+          category: input[:category].downcase
         }
         PredictHQ::EventMapper
           .new(Api.config.PHQ_TOKEN)

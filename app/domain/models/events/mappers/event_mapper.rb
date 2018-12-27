@@ -3,6 +3,7 @@
 module FantasticProject
   module PredictHQ
     # Gives access to the data
+    # :reek:NilCheck
     class EventMapper
       def initialize(token, gateway_class = FantasticProject::PredictHQ::Api)
         @token = token

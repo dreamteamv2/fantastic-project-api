@@ -7,6 +7,8 @@ require 'econfig'
 
 module FantasticProject
   # Environment-specific configuration
+
+  # :reek:UncommunicativeMethodName
   class Api < Roda
     plugin :environments
 

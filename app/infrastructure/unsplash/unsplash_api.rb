@@ -1,9 +1,10 @@
 # frozen_string_literal: false
 
-require "http"
-require "cgi"
+require 'http'
+require 'cgi'
 
 module FantasticProject
+  # :reek:FeatureEnvy
   module Unsplash
     # Library for PredictHQ Web API
     class Api
@@ -12,12 +13,12 @@ module FantasticProject
       end
 
       def search_images(params)
-        Request.new(@client_id).query(params).parse["results"]
+        Request.new(@client_id).query(params).parse['results']
       end
 
       # Sends out HTTP requests to PredictHQ
       class Request
-        API_PATH = "https://api.unsplash.com/".freeze
+        API_PATH = 'https://api.unsplash.com/'.freeze
 
         def initialize(client_id)
           @client_id = client_id
@@ -25,7 +26,7 @@ module FantasticProject
         end
 
         def query(params)
-          tag = {query: params}
+          tag = { query: params }
           query = CGI.unescape(URI.encode_www_form(tag))
           get(API_PATH + @event_endpoint + query)
         end
@@ -48,7 +49,7 @@ module FantasticProject
 
         HTTP_ERROR = {
           401 => Unauthorized,
-          404 => NotFound,
+          404 => NotFound
         }.freeze
 
         def successful?

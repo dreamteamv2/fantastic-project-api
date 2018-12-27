@@ -45,22 +45,22 @@ module FantasticProject
             id: nil,
             name: name,
             alpha2: alpha2,
-            country_code: country_code,
+            country_code: country_code
           )
         end
 
         private
 
         def name
-          @data["name"]
+          @data['name']
         end
 
         def alpha2
-          @data["alpha-2"]
+          @data['alpha-2']
         end
 
         def country_code
-          @data["country-code"]
+          @data['country-code']
         end
       end
     end
