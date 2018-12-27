@@ -4,11 +4,10 @@
 module FantasticProject
   module Representer
     # Representer object for events requests
-    class EventsRequest < Roar::Decorator
+    class DownloadRequest < Roar::Decorator
       include Roar::JSON
 
-      property :country_code
-      property :category
+      property :tag
       property :id
     end
   end

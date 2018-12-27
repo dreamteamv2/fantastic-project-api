@@ -187,6 +187,20 @@ namespace :worker do
   end
 end
 
+namespace :repostore do
+  task :config do
+    require_relative "config/environment.rb" # load config info
+    @api = CodePraise::Api
+  end
+
+  desc "Delete images in store"
+  task :wipe => :config do
+    sh "rm -rf #{@api.config.IMAGE_PATH}/*" do |ok, _|
+      puts(ok ? "Cloned repos deleted" : "Could not delete cloned repos")
+    end
+  end
+end
+
 namespace :quality do
   CODE = "app"
 

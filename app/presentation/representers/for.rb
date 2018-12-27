@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'event_representer'
-require_relative 'events_representer'
-require_relative 'http_response_representer'
+require_relative "event_representer"
+require_relative "full_event_representer"
+require_relative "events_representer"
+require_relative "http_response_representer"
 
 module FantasticProject
   module Representer
@@ -10,8 +11,9 @@ module FantasticProject
     class For
       REP_KLASS = {
         Value::EventsList => EventsList,
+        Value::FullEvent => FullEvent,
         Entity::Event => Event,
-        String => HttpResponse
+        String => HttpResponse,
       }.freeze
 
       attr_reader :status_rep, :body_rep

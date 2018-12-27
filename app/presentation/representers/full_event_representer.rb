@@ -9,16 +9,13 @@ require_relative "image_representer"
 module FantasticProject
   module Representer
     # Represent a Project entity as Json
-    class Event < Roar::Decorator
+    class FullEvent < Roar::Decorator
       include Roar::JSON
       include Roar::Hypermedia
       include Roar::Decorator::HypermediaConsumer
 
-      property :origin_id
-      property :country_code
-      property :category
-      property :title
-      property :description
+      property :event, extend: Representer::Event, class: OpenStruct
+      collection :images, extend: Representer::Image, class: OpenStruct
 
       private
 

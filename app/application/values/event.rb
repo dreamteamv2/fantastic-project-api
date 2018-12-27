@@ -2,6 +2,7 @@
 
 module FantasticProject
   module Value
-    GetInfoRequest = Struct.new :tag, :id
+    # event and images
+    FullEvent = Struct.new(:event, :images)
   end
 end

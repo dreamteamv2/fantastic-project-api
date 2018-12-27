@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
-require 'http'
-require 'cgi'
+require "http"
+require "cgi"
 
 module FantasticProject
   module Unsplash
@@ -12,29 +12,26 @@ module FantasticProject
       end
 
       def search_images(params)
-        Request.new(@client_id).query(params).parse['results']
+        Request.new(@client_id).query(params).parse["results"]
       end
 
       # Sends out HTTP requests to PredictHQ
       class Request
-        API_PATH = 'https://api.unsplash.com/'.freeze
-        EVENT_ENDPOINT = '/search/photos?'.freeze
+        API_PATH = "https://api.unsplash.com/".freeze
 
         def initialize(client_id)
           @client_id = client_id
+          @event_endpoint = "/search/photos?client_id=#{@client_id}&"
         end
 
         def query(params)
-          query = CGI.unescape(URI.encode_www_form(params))
-          get(API_PATH + EVENT_ENDPOINT + query)
+          tag = {query: params}
+          query = CGI.unescape(URI.encode_www_form(tag))
+          get(API_PATH + @event_endpoint + query)
         end
 
         def get(url)
-          http_response = HTTP.headers(
-            'Accept' => 'application/json',
-            'Authorization' => "Bearer #{@client_id}"
-          ).get(url)
-
+          http_response = HTTP.get(url)
           Response.new(http_response).tap do |response|
             raise(response.error) unless response.successful?
           end
@@ -51,7 +48,7 @@ module FantasticProject
 
         HTTP_ERROR = {
           401 => Unauthorized,
-          404 => NotFound
+          404 => NotFound,
         }.freeze
 
         def successful?

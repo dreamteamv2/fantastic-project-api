@@ -6,7 +6,6 @@ module GetInfo
     GET_INFO_PROGRESS = {
       "STARTED" => 15,
       "images" => 85,
-      "weather" => 95,
       "FINISHED" => 100,
     }.freeze
 

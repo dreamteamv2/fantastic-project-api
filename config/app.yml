@@ -4,7 +4,7 @@ development:
   API_HOST: http://localhost:9090
   COUNTRIES_FILE_PATH: app/infrastructure/local_files/json_files/countries.json
   CATEGORIES_FILE_PATH: app/infrastructure/local_files/json_files/categories.json
-  IMAGE_PATH: app/presentations/views/assets/img/
+  IMAGE_PATH: public
 
 test:
   DB_FILENAME: app/infrastructure/database/local/test.db

@@ -11,7 +11,10 @@ module FantasticProject
     plugin :caching
     use Rack::MethodOverride
 
+    plugin :public, root: "./public"
+
     route do |routing|
+      routing.public
       response["Content-Type"] = "application/json"
 
       # GET /
@@ -29,15 +32,27 @@ module FantasticProject
       routing.on "api/v1" do
         routing.on "events" do
           routing.on String, String do |category, country|
+
             # GET /events/{category}/{country}
             routing.get do
-              #  Cache::Control.new(response).turn_on if Env.new(Api).production?
+              Cache::Control.new(response).turn_on if Env.new(Api).production?
 
-              request_id = [request.env, request.path, Time.now.to_f].hash
-
-              result = Service::SearchCountry.new.call(
+              result = Service::EventList.new.call(
                 country: country,
                 category: category,
+              )
+              Representer::For.new(result).status_and_body(response)
+            end
+          end
+
+          routing.on Integer do |id|
+            # GET /events/{id}
+            routing.get do
+              Cache::Control.new(response).turn_on if Env.new(Api).production?
+
+              request_id = [request.env, request.path, Time.now.to_f].hash
+              result = Service::Event.new.call(
+                id: id,
                 request_id: request_id,
               )
               Representer::For.new(result).status_and_body(response)
