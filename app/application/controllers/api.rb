@@ -46,6 +46,11 @@ module FantasticProject
 
             # GET /events/{id}
             routing.get do
+              testp = Mapper::ImageFileMapper
+                .new("taiwan", Api.config.UNSPLASH_KEY)
+                .load_data
+
+              Repository::ImageRepo.new("taiwan", Api.config, testp).download_images
               request_id = [request.env, request.path, Time.now.to_f].hash
 
               result = Service::Event.new.call(

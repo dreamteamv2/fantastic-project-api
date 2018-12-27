@@ -6,9 +6,9 @@ module FantasticProject
     class ImageFileMapper
       attr_reader :folder_name
 
-      def initialize(city, gateway_class)
-        @city = city
-        @gateway_class = gateway_class
+      def initialize(query, client_id, gateway_class = Unsplash::Api)
+        @query = query
+        @gateway_class = gateway_class.new(client_id)
       end
 
       def self.build_entity(data)
@@ -16,7 +16,7 @@ module FantasticProject
       end
 
       def load_data
-        @gateway_class.loadImages.map do |data|
+        @gateway_class.search_images(@query).map do |data|
           ImageFileMapper.build_entity(data)
         end
       end
@@ -28,31 +28,21 @@ module FantasticProject
         end
 
         def build_entity
-          Entity::Category.new(
+          Entity::ImageFile.new(
             id: nil,
             origin_id: origin_id,
-            description: description,
-            file: file,
-            url: url
+            url: url,
           )
         end
 
         private
 
         def origin_id
-          @data['origin_id']
-        end
-
-        def description
-          @data['description']
-        end
-
-        def file
-          @data['file']
+          @data["id"]
         end
 
         def url
-          @data['url']
+          @data["links"]["download"]
         end
       end
     end
