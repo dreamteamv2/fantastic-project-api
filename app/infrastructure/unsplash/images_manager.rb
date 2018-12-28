@@ -27,7 +27,7 @@ module FantasticProject
       end
 
       def check_folder
-        puts 'aca'
+        puts @download_path
         FileUtils.mkdir_p @download_path unless exists?
       end
 
