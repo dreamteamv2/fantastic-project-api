@@ -51,6 +51,8 @@ module GetInfo
         .new(tag, Worker.config.UNSPLASH_KEY)
         .load_data
 
+      puts images
+
       FantasticProject::Repository::ImageRepo.new(tag, Worker.config, images)
         .download_images
 
