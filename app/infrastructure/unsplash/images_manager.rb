@@ -20,11 +20,14 @@ module FantasticProject
         false unless @files
         check_folder
         @files.map do |file|
+          puts 'aca 2'
+          puts file.url
           DownloadFile.new(file, @download_path).download
         end
       end
 
       def check_folder
+        puts 'aca'
         FileUtils.mkdir_p @download_path unless exists?
       end
 
