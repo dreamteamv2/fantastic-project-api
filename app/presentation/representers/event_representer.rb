@@ -14,6 +14,7 @@ module FantasticProject
       include Roar::Hypermedia
       include Roar::Decorator::HypermediaConsumer
 
+      property :id
       property :origin_id
       property :country_code
       property :category
