@@ -18,6 +18,7 @@ module FantasticProject
       end
 
       def uploadImage(path)
+        puts 'aca s3'
         resource = Aws::S3::Resource.new(client: @client)
         resource.bucket(@bucket_name).object(path).upload_file(path)
       end
