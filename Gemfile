@@ -33,6 +33,9 @@ gem 'http', '~> 3.0'
 # Queues
 gem 'aws-sdk-sqs', '~> 1'
 
+#s3
+gem 'aws-sdk-s3', '~> 1'
+
 # Database
 gem 'hirb', '~> 0.7'
 gem 'sequel', '~> 5.13'

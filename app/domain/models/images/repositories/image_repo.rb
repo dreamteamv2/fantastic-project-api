@@ -13,7 +13,7 @@ module FantasticProject
 
       def initialize(tag, config, files = nil)
         @files = files
-        @local = Unsplash::ImagesManager.new(tag, config.IMAGE_PATH, @files)
+        @local = Unsplash::ImagesManager.new(tag, config, @files)
       end
 
       def local

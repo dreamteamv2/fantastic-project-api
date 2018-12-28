@@ -5,29 +5,29 @@ require 'cgi'
 require 'open-uri'
 require 'fileutils'
 
+require_relative '../s3/init'
+
 module FantasticProject
   # :reek:NestedIterators
   module Unsplash
     # Library for download images by  Web API link
     class ImagesManager
-      def initialize(tag, path, files = nil)
+      def initialize(tag, config, files = nil)
         @files = files
+        @config = config
         @tag = tag.gsub(/[^0-9A-Za-z]/, '')
-        @download_path = "#{path}/#{tag}"
+        @download_path = "#{config.IMAGE_PATH}/#{tag}"
       end
 
       def download_files
         false unless @files
-        check_folder
+        self.check_folder
         @files.map do |file|
-          puts 'aca 2'
-          puts file.url
-          DownloadFile.new(file, @download_path).download
+          DownloadFile.new(file, @download_path, @config).download
         end
       end
 
       def check_folder
-        puts @download_path
         Dir.mkdir @download_path unless exists?
       end
 
@@ -46,10 +46,11 @@ module FantasticProject
 
     # Download class
     class DownloadFile
-      def initialize(file, path)
+      def initialize(file, path, config)
         @name = file.origin_id
         @url = file.url
         @path = "#{path}/#{@name}.jpg"
+        @config = config
       end
 
       def file_exists?
@@ -64,6 +65,7 @@ module FantasticProject
             file.puts fcloud.read
           end
         end
+        S3::UploadFileS3.new('test-app', @config).uploadImage(@path)
       end
       # rubocop:enable Security/Open
     end

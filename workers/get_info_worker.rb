@@ -4,6 +4,7 @@ require_relative '../app/domain/init.rb'
 require_relative '../app/application/values/init.rb'
 require_relative '../app/presentation/representers/init.rb'
 require_relative '../app/infrastructure/unsplash/init.rb'
+require_relative '../app/infrastructure/s3/init.rb'
 
 require_relative 'progress_reporter.rb'
 require_relative 'get_info_monitor.rb'
