@@ -28,7 +28,7 @@ module FantasticProject
 
       def check_folder
         puts @download_path
-        FileUtils.mkdir_p @download_path unless exists?
+        Dir.mkdir @download_path unless exists?
       end
 
       def exists?
@@ -36,7 +36,7 @@ module FantasticProject
       end
 
       def delete
-        FileUtils.rm_rf(@download_path)
+        FileUtils.rm_rf @download_path
       end
 
       def local_images
