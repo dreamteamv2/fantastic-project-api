@@ -4,6 +4,7 @@ require 'roar/decorator'
 require 'roar/json'
 
 require_relative 'image_representer'
+require_relative 'event_representer'
 
 # Represents essential Repo information for API output
 module FantasticProject
