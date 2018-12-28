@@ -19,7 +19,7 @@ module FantasticProject
 
       def uploadImage(path)
         resource = Aws::S3::Resource.new(client: @client)
-        resource.bucket(@bucket_name).object(key: path, acl: "public-read").upload_file(path)
+        resource.bucket(@bucket_name).object(path).upload_file path, {acl: 'public-read'}
       end
     end
   end
