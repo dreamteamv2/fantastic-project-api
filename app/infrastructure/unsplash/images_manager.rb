@@ -23,6 +23,7 @@ module FantasticProject
         false unless @files
         self.check_folder
         @files.map do |file|
+          sleep 3
           DownloadFile.new(file, @download_path, @config).download
         end
       end

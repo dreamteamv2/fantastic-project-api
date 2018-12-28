@@ -38,8 +38,9 @@ module FantasticProject
       # rubocop:disable Metrics/AbcSize
       def request_images(input)
         input[:country] = filter_country(input)
+
         if Repository::ImageRepo.new(input[:country].name, Api.config)
-            .exists_locally?
+            .s3_exists?
           Success(input)
         else
           Messaging::Queue.new(Api.config.GET_INFO_QUEUE_URL, Api.config)
@@ -52,7 +53,7 @@ module FantasticProject
       # rubocop:enable Metrics/AbcSize
 
       def event_info(input)
-        images = local_images(input)
+        images = s3_images(input)
         Value::FullEvent.new(input[:event], images)
           .yield_self do |data|
           Success(Value::Result.new(status: :ok, message: data))
@@ -80,6 +81,11 @@ module FantasticProject
       def local_images(input)
         Repository::ImageRepo.new(input[:country].name, Api.config)
           .local_images
+      end
+
+      def s3_images(input)
+        Repository::ImageRepo.new(input[:country].name, Api.config)
+          .s3_images
       end
     end
   end
