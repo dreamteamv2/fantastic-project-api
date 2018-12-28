@@ -21,7 +21,7 @@ module FantasticProject
 
       def download_files
         false unless @files
-        self.check_folder
+        check_folder
         @files.map do |file|
           sleep 3
           DownloadFile.new(file, @download_path, @config).download
@@ -66,7 +66,7 @@ module FantasticProject
             file.puts fcloud.read
           end
         end
-        S3::UploadFileS3.new('test-app', @config).uploadImage(@path)
+        S3::UploadFileS3.new('test-app', @config).upload_image(@path)
       end
       # rubocop:enable Security/Open
     end

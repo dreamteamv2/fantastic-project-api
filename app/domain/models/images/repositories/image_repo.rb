@@ -30,7 +30,7 @@ module FantasticProject
 
       def s3_images
         images = S3::UploadFileS3
-         .new('test-app', @config).s3_images("#{@config.IMAGE_PATH}/#{@tag}/")
+          .new('test-app', @config).s3_images("#{@config.IMAGE_PATH}/#{@tag}/")
         images.map do |image|
           Entity::ImageFile.new(origin_id: '1', url: image.key)
         end
