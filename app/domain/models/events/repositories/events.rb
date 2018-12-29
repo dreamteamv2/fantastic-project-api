@@ -50,7 +50,6 @@ module FantasticProject
 
         db_records = Database::EventOrm
           .where(country_code: country, category: category)
-          .where { created_at > beginning_of_day }
 
         rebuild_many(db_records)
       end
