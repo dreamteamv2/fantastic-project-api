@@ -33,7 +33,8 @@ module GetInfo
 
     def perform(_sqs_msg, request)
       tag, reporter = setup_job(request)
-      get_images(tag, reporter)
+      get_images(tag)
+      reporter.publish GetInfoMonitor.progress("images")
       each_second(5) { reporter.publish(GetInfoMonitor.finished_percent) }
     end
 
@@ -47,7 +48,7 @@ module GetInfo
        ProgressReporter.new(Worker.config, download_request.id)]
     end
 
-    def get_images(tag, reporter)
+    def get_images(tag)
       images = FantasticProject::Mapper::ImageFileMapper
         .new(tag, Worker.config.UNSPLASH_KEY)
         .load_data
@@ -55,7 +56,8 @@ module GetInfo
       FantasticProject::Repository::ImageRepo.new(tag, Worker.config, images)
         .download_images
 
-      reporter.publish GetInfoMonitor.progress("images")
+    rescue StandardError
+      raise 'Could not get the image'
     end
 
     def each_second(seconds)
