@@ -71,6 +71,7 @@ module FantasticProject
         rescue => ex
           puts ex.message
         end
+      end
       # rubocop:enable Security/Open
     end
   end
