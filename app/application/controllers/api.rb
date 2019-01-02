@@ -47,8 +47,6 @@ module FantasticProject
           routing.on Integer do |id|
             # GET /events/{id}
             routing.get do
-              Cache::Control.new(response).turn_on if Env.new(Api).production?
-
               request_id = [request.env, request.path, Time.now.to_f].hash
               result = Service::Event.new.call(
                 id: id,
