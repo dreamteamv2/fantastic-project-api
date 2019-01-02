@@ -61,15 +61,16 @@ module FantasticProject
       # rubocop:disable Security/Open
       def download
         false unless file_exists?
-        open(@url) do |fcloud|
-          File.open(@path, 'wb') do |file|
-            file.puts fcloud.read
+        begin
+          open(@url) do |fcloud|
+            File.open(@path, 'wb') do |file|
+              file.puts fcloud.read
+            end
           end
+          S3::UploadFileS3.new('test-app', @config).upload_image(@path)
+        rescue => ex
+          puts ex.message
         end
-        S3::UploadFileS3.new('test-app', @config).upload_image(@path)
-      rescue StandardError
-        raise 'Could not get the image'
-      end
       # rubocop:enable Security/Open
     end
   end
