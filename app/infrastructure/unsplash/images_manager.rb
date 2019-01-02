@@ -67,6 +67,8 @@ module FantasticProject
           end
         end
         S3::UploadFileS3.new('test-app', @config).upload_image(@path)
+      rescue StandardError
+        raise 'Could not get the image'
       end
       # rubocop:enable Security/Open
     end
